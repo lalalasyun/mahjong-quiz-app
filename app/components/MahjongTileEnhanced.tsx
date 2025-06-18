@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Tile } from '@/types/mahjong';
 import PinTileDesign from './PinTileDesign';
 
@@ -51,39 +52,45 @@ export default function MahjongTileEnhanced({ tile, isSelected, onClick, disable
 
     if (tile.type === 'sou') {
       // Sou design
-      const souDesigns: Record<number, JSX.Element> = {
-        1: (
-          <g>
-            <circle cx="35" cy="40" r="12" fill="#16A34A" stroke="#15803D" strokeWidth="1.5" />
-            <text x="35" y="47" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">索</text>
-          </g>
-        ),
-        2: (
-          <g>
-            <circle cx="35" cy="25" r="10" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
-            <circle cx="35" cy="55" r="10" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
-          </g>
-        ),
-        3: (
-          <g>
-            <circle cx="25" cy="25" r="8" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
-            <circle cx="35" cy="40" r="8" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
-            <circle cx="45" cy="55" r="8" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
-          </g>
-        ),
-        default: (
-          <>
-            <text x="35" y="38" fontSize="32" fontWeight="bold" textAnchor="middle" fill="#16A34A">
-              {tile.number}
-            </text>
-            <text x="35" y="60" fontSize="16" fontWeight="600" textAnchor="middle" fill="#16A34A">
-              索
-            </text>
-          </>
-        )
+      const getSouDesign = (number: number): React.ReactElement => {
+        switch (number) {
+          case 1:
+            return (
+              <g>
+                <circle cx="35" cy="40" r="12" fill="#16A34A" stroke="#15803D" strokeWidth="1.5" />
+                <text x="35" y="47" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">索</text>
+              </g>
+            );
+          case 2:
+            return (
+              <g>
+                <circle cx="35" cy="25" r="10" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
+                <circle cx="35" cy="55" r="10" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
+              </g>
+            );
+          case 3:
+            return (
+              <g>
+                <circle cx="25" cy="25" r="8" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
+                <circle cx="35" cy="40" r="8" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
+                <circle cx="45" cy="55" r="8" fill="#16A34A" stroke="#15803D" strokeWidth="1" />
+              </g>
+            );
+          default:
+            return (
+              <>
+                <text x="35" y="38" fontSize="32" fontWeight="bold" textAnchor="middle" fill="#16A34A">
+                  {number}
+                </text>
+                <text x="35" y="60" fontSize="16" fontWeight="600" textAnchor="middle" fill="#16A34A">
+                  索
+                </text>
+              </>
+            );
+        }
       };
       
-      return souDesigns[tile.number!] || souDesigns.default;
+      return getSouDesign(tile.number!);
     }
 
     // Man tiles

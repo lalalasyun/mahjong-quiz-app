@@ -118,7 +118,7 @@ export default function MahjongTileSVG({ tile, isSelected, onClick, disabled }: 
               fill={content.color}
               style={{ fontFamily: 'sans-serif' }}
             >
-              {content.subtitle}
+              {'subtitle' in content ? content.subtitle : ''}
             </text>
           </>
         )}
